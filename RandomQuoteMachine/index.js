@@ -1,6 +1,6 @@
 function App(){
     const [quotes,setQuotes] = React.useState("");
-    const [color,setColor] = React.useState("#fff");
+    const [color,setColor] = React.useState({"hex":"#000"});
     const [randQuote,setRandQuote] = React.useState("");
 
     React.useEffect(()=>{ //Takes 2 args, 1st a callback function and 2nd an array of dependencies 
@@ -128,11 +128,12 @@ function App(){
                                 )}
             
                                 <div >
-                                    <button onClick={getNewQuote} class="btn btn-dark">New Quote</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                    <button onClick={getNewQuote} className="btn btn-dark">New Quote</button>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                                    
                                     <a href= {"https://twitter.com/intent/tweet?text=" + 
                                     encodeURIComponent(
                                         '"' + randQuote.text  + '"  ' + '-'+ randQuote.author
-                                    )} target="_blank" className="btn btn-primary"><i className="fa fa-twitter" /></a>
+                                    )} target="_blank" className="btn btn-primary"><i className="fa fa-square-twitter" /></a>
                                     
                                 </div>  
                             {/* <a href="#" class="btn btn-primary">Go somewhere</a> */}
