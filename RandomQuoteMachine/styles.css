@@ -1,0 +1,9 @@
+*{
+    transition: all 0.9s ease-in-out;
+}
+
+.box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
