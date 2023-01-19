@@ -1,0 +1,20 @@
+body{
+    background-color:#1D3557;
+}
+.card-header{
+    background-color: #E63946;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color:#F1FAEE;
+}  
+.card-body{
+    background-color: #dadada;
+}
+
+.p-4{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color:#F1FAEE;
+    text-align: center;
+}
+.textarea{
+    background-color: #dadada;
+}
