@@ -73,6 +73,7 @@ function App() {
     console.log(pressed)
     const audio = document.getElementById(pressed);
     console.log(audio)
+    audio.volume = volume;
     audio.play();                 
     setActiveKey(pressed);
   }
@@ -102,12 +103,13 @@ function App() {
             <input
             type="range"
             step="0.01"
-            onChange={()=>{
-              volume(volume)
+            onChange={(event)=>{
+              // console.log(event);
+              setVolume(event.target.value);
             }}
             max="1"
             min="0"
-            value={volume}
+            // value={volume}
             className="w-10"
             ></input>
           </div>
