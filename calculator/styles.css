@@ -1,0 +1,73 @@
+.container{
+    padding-top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows:  1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+    "display display display display"
+    "AC C    div mult"
+    "svn egt nin sub"
+    "fr fv sx add"
+    "one two three eq"
+    "zro zro dot eq"
+    ;
+    border: 10px solid black;
+    border-radius: 2%;
+}
+.calcbtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #ff9500;
+    color: white;
+    border: 1px solid #505050;
+}
+.calcbtn:hover{
+    border: 1px solid rgb(211, 211, 211);
+    color: white;
+}
+
+.zro{
+    grid-area: zro;
+
+}
+.eq{
+    grid-area: eq;
+    background-color: #0096FF;
+}
+.display{
+    grid-area: display;
+    background-color: #505050;
+    color: white;
+    
+    text-align: right;
+    font-size: 20px;
+}
+
+.dgt-color{
+    background-color: #1c1c1c;
+    color:white;
+}
+.clr-color{
+    background-color: #68B984;
+}
+
+.total{
+    padding:5px 20px;
+    color:red
+}
+.inpt{
+    background-color: #505050;
+    
+}
+input::placeholder{
+    color: white;
+    /* background-color: white; */
+}
