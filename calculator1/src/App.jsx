@@ -4,7 +4,7 @@ import './App.css'
 
 
 function App(){
-  const [exprsn, setExprsn] = useState('');
+  const [exprsn, setExprsn] = useState('0');
   const [ans,setAns] = useState('0'); 
   const [lastdgt,setLastdgt]= useState('');
   const [secondLast,setSecondLast]=useState('');
@@ -16,15 +16,19 @@ function App(){
 
   const number = (event) =>{
     const value = event.target.innerHTML;
-    if(exprsn != ''){
-      setExprsn(exprsn + value);
-      setLastdgt(value);
-      setSecondLast(exprsn.slice(-1))
-    }
-    else{
-      setExprsn(exprsn + value);
-      setLastdgt(value);
-      setSecondLast(exprsn.slice(-1))
+    if(value !='0'){
+      if(exprsn != ''){
+        setExprsn(exprsn + value);
+        setAns(exprsn+value)
+        setLastdgt(value);
+        setSecondLast(exprsn.slice(-1))
+      }
+      else{
+        setExprsn(exprsn + value);
+        setAns(exprsn+value)
+        setLastdgt(value);
+        setSecondLast(exprsn.slice(-1))
+      }
     }
   }
   
@@ -42,6 +46,7 @@ function App(){
         // console.log(lastdgt)
 
         setExprsn(exprsn+value)
+        setAns(exprsn+value)
         setLastdgt(value)
         setSecondLast(exprsn.slice(-1))
         setDecpoint(1);
@@ -52,6 +57,7 @@ function App(){
       }
       else if(numbers.includes(lastdgt)){
         setExprsn(exprsn+value)
+        setAns(exprsn+value)
         setLastdgt(value)
         setSecondLast(exprsn.slice(-1))
         setDecpoint(1)
@@ -63,6 +69,7 @@ function App(){
           console.log(secondLast)
           console.log(lastdgt)
           setExprsn(exprsn.slice(0,-1) + value);
+          setAns(exprsn.slice(0,-1)+value)
           setLastdgt(value);
           setSecondLast(exprsn.slice(-2,-1))
           setDecpoint(1)
@@ -74,6 +81,7 @@ function App(){
         }
         else if(numbers.includes(lastdgt)){
           setExprsn(exprsn+value)
+          setAns(exprsn+value)
           setLastdgt(value)
           setSecondLast(exprsn.slice(-1))
           setDecpoint(1)
@@ -82,56 +90,30 @@ function App(){
       }
     else if(numbers.includes(lastdgt)){
       setExprsn(exprsn+value);
+      setAns(exprsn+value)
       setLastdgt(value);
       setSecondLast(exprsn.slice(-1))    }
     else{
       setExprsn(exprsn+value);
+      setAns(exprsn+value)
       setLastdgt(value);
       setSecondLast(exprsn.slice(-1))
     }
   }
 
-  const display = (char) => {
-      setExprsn((prev) =>{   
-          const regex = /[\+\-\*\/]/i ; 
-          const last = prev.slice(-1);
-          if(char === "."){
-              if(regex.test(prev)){
-                  return prev+char;
-              }else{
-                  if(prev.includes('.') ){
-                      return prev;
-                  }else{
-                      return prev + char;
-                  }
-              }
-          }
-          // else if(char === "+"||char === "-"||char === "*"||char === "/"){
-          else if(regex.test(char)){
-              if(regex.test(last)){
-                  prev = prev.slice(0,-1)
-                  return prev+char;
-              }else{
-                  return prev+char;
-              }
-              // return prev+char;
-          }else{
-              return prev+char;
-          }
-          
-
-      });
-  };
-
   const point = (event) => {
     const value = event.target.innerHTML;
     if(exprsn!=''){
       if(decpoint){
-        setExprsn(exprsn+value);
+        setExprsn(exprsn+value+'0');
+        setAns(exprsn+value+'0')
+        setSecondLast('.')
+        setLastdgt('0')
         setDecpoint(0);
       }
     }else{
       setExprsn(exprsn+value);
+      setAns(exprsn+value)
       setDecpoint(0);
     }
   }
@@ -139,7 +121,8 @@ function App(){
 
   const calculate = ()=>{
       setAns(eval(exprsn).toFixed(4)); 
-      setExprsn(ans);
+      setExprsn(eval(exprsn).toFixed(4));
+      
       setDecpoint(1);
       setSecondLast('')
       setLastdgt('')
@@ -154,6 +137,7 @@ function App(){
   };
   const clear = () =>{
       setExprsn((prev)=>prev.split("").slice(0,-1).join(""));
+      setAns((prev)=>prev.split("").slice(0,-1).join(""))
       setLastdgt(exprsn.slice(-2,-1))
       setSecondLast(exprsn.slice(-3,-2))
       setAns('0');
