@@ -105,8 +105,8 @@ function App(){
     const value = event.target.innerHTML;
     if(exprsn!=''){
       if(decpoint){
-        setExprsn(exprsn+value+'0');
-        setAns(exprsn+value+'0')
+        setExprsn(exprsn+value);
+        setAns(exprsn+value)
         setSecondLast('.')
         setLastdgt('0')
         setDecpoint(0);
@@ -146,9 +146,9 @@ function App(){
       <div className="container">
           <div className="grid">
 
-              <div className="display" id='display' >
+              <div className="display">
                   <input type="text" className="inpt display" value={exprsn} placeholder="0" disabled/>
-                  <div className="total">{ans}</div>
+                  <div className="total" id="display">{Number(ans).toString()}</div>
               </div>             
               <div onClick={allClear} id="clear" className="calcbtn AC clr-color">AC</div>
               <div onClick={clear} id="back" className="calcbtn C clr-color">C</div>
