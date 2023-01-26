@@ -8,6 +8,7 @@ function App(){
   const [ans,setAns] = useState('0'); 
   const [lastdgt,setLastdgt]= useState('');
   const [secondLast,setSecondLast]=useState('');
+  const [decpoint,setDecpoint]=useState(1);
 
   const operators = ['+','*','/'];
   const minus = ['-'];
@@ -43,6 +44,7 @@ function App(){
         setExprsn(exprsn+value)
         setLastdgt(value)
         setSecondLast(exprsn.slice(-1))
+        setDecpoint(1);
         // console.log(secondLast)
       }
       else if(operators.includes(lastdgt) || minus.includes(lastdgt) && (operators.includes(secondLast) || minus.includes(secondLast))){
@@ -52,35 +54,41 @@ function App(){
         setExprsn(exprsn+value)
         setLastdgt(value)
         setSecondLast(exprsn.slice(-1))
+        setDecpoint(1)
       }
     }
     //Checking if operator is other than minus
     else if(operators.includes(value)){
         if((operators.includes(lastdgt) || minus.includes(lastdgt)) && numbers.includes(secondLast)){
+          console.log(secondLast)
+          console.log(lastdgt)
           setExprsn(exprsn.slice(0,-1) + value);
           setLastdgt(value);
-          setSecondLast(exprsn.slice(-1))
+          setSecondLast(exprsn.slice(-2,-1))
+          setDecpoint(1)
         }
         else if((operators.includes(lastdgt) || minus.includes(lastdgt)) && (operators.includes(secondLast) || minus.includes(secondLast))){
+          console.log(secondLast)
+          console.log(lastdgt)
           return;
         }
         else if(numbers.includes(lastdgt)){
           setExprsn(exprsn+value)
           setLastdgt(value)
           setSecondLast(exprsn.slice(-1))
+          setDecpoint(1)
         }
 
       }
     else if(numbers.includes(lastdgt)){
       setExprsn(exprsn+value);
       setLastdgt(value);
+      setSecondLast(exprsn.slice(-1))    }
+    else{
+      setExprsn(exprsn+value);
+      setLastdgt(value);
       setSecondLast(exprsn.slice(-1))
     }
-    // else{
-    //   setExprsn(exprsn+value);
-    //   setLastdgt(value);
-    //   setSecondLast(exprsn.slice(-1))
-    // }
   }
 
   const display = (char) => {
@@ -114,23 +122,47 @@ function App(){
 
       });
   };
+
+  const point = (event) => {
+    const value = event.target.innerHTML;
+    if(exprsn!=''){
+      if(decpoint){
+        setExprsn(exprsn+value);
+        setDecpoint(0);
+      }
+    }else{
+      setExprsn(exprsn+value);
+      setDecpoint(0);
+    }
+  }
+
+
   const calculate = ()=>{
-      setAns(eval(exprsn)); 
-      setExprsn('');
+      setAns(eval(exprsn).toFixed(4)); 
+      setExprsn(ans);
+      setDecpoint(1);
+      setSecondLast('')
+      setLastdgt('')
+
   };
   const allClear =() =>{
-      setExprsn("");
-      setAns(0);
+    setExprsn('');
+    setAns('0');
+    setLastdgt('');
+    setSecondLast('');
+    setDecpoint(1);
   };
   const clear = () =>{
       setExprsn((prev)=>prev.split("").slice(0,-1).join(""));
-
-      setAns(0);
+      setLastdgt(exprsn.slice(-2,-1))
+      setSecondLast(exprsn.slice(-3,-2))
+      setAns('0');
   };
   return(
       <div className="container">
           <div className="grid">
-              <div className="display" id="display">
+
+              <div className="display" id='display' >
                   <input type="text" className="inpt display" value={exprsn} placeholder="0" disabled/>
                   <div className="total">{ans}</div>
               </div>             
@@ -151,7 +183,7 @@ function App(){
               <div onClick={number} id="three" className="calcbtn three dgt-color" >3</div>
               <div onClick={calculate} id="equals" className="calcbtn eq">=</div>
               <div onClick={number} id="zero" className="calcbtn zro dgt-color">0</div>
-              <div onClick={number} id="decimal" className="calcbtn dot dgt-color">.</div>
+              <div onClick={point} id="decimal" className="calcbtn dot dgt-color">.</div>
               
               
               
